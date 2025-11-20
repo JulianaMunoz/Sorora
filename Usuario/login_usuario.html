@@ -11,17 +11,17 @@
 <header>
     <nav class="navbar">
     <div class="nav-logo">
-        <a href="./index.html"><h1>Sorora</h1></a>
+        <a href="../index.html"><h1>Sorora</h1></a>
     </div>
 
     <!-- BOTÓN HAMBURGUESA -->
     <div class="menu-toggle" onclick="toggleMenu()">☰</div>
 
     <ul class="nav-links">
-        <li><img src="./assets/llamada-telefonica.png" alt="HL"><a href="./hotlines/hotlines.html" class="active">Hotlines</a></li>
-        <li><img src="./assets/casa.png" alt="RF"><a href="./index.html">Refugios</a></li>
-        <li><img src="./assets/informe.png" alt="RP"><a href="./Reportes/registrar_reporte.html">Reportes</a></li>
-        <li><img src="./assets/news-podcast.png" alt="NW"><a href="./noticias/noticias.html">Noticias</a></li>
+        <li><img src="../assets/llamada-telefonica.png" alt="HL"><a href="../hotlines/hotlines.html" class="active">Hotlines</a></li>
+        <li><img src="../assets/casa.png" alt="RF"><a href="../index.html">Refugios</a></li>
+        <li><img src="../assets/informe.png" alt="RP"><a href="../Reportes/registrar_reporte.html">Reportes</a></li>
+        <li><img src="../assets/news-podcast.png" alt="NW"><a href="../noticias/noticias.html">Noticias</a></li>
     </ul>
 
     <div class="nav-user">
@@ -80,6 +80,50 @@
         }
     }
     }
+
+        /* ---------- MENU HAMBURGUESA: visibilidad condicional + toggle ---------- */
+
+    // referenciamos elementos de menú
+    const navbar = document.querySelector(".navbar");
+    const menuToggle = document.querySelector(".menu-toggle");
+
+    // definimos toggleMenu como global (para que onclick en HTML funcione)
+    window.toggleMenu = function () {
+      if (!navbar) return;
+      navbar.classList.toggle("open");
+    };
+
+    // Función que controla la visibilidad del icono hamburguesa según ancho
+    function updateMenuToggleVisibility() {
+      if (!menuToggle || !navbar) return;
+      const isMobile = window.matchMedia("(max-width: 768px)").matches;
+
+      if (isMobile) {
+        // quitamos estilo inline que podría haber dejado JS previo
+        menuToggle.style.display = "";
+      } else {
+        // ocultar el icono y forzar cerrar el menú para desktop
+        menuToggle.style.display = "none";
+        navbar.classList.remove("open");
+      }
+    }
+
+    // Inicializar visibilidad una vez cargue la página (y después cuando se redimensione)
+    window.addEventListener("load", updateMenuToggleVisibility);
+
+    let resizeTimer;
+    window.addEventListener("resize", () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(updateMenuToggleVisibility, 120);
+    });
+
+    /* ---------- Seguridad: si el menuToggle fue clickado programáticamente ---------- */
+    if (menuToggle) {
+      // Si alguien le pone display block por error desde fuera, nos aseguramos en el inicio
+      updateMenuToggleVisibility();
+    }
+
+    /* ---------- FIN del archivo ---------- */
   </script>
   </div>
 </body>
