@@ -1,85 +1,196 @@
 @import url('../css/global.css');
 
+/* =============================
+SECCIÓN DE NOTICIAS
+============================= */
+
 /* Contenedor principal */
 h2 {
-    color: var(--color-dark);
-    text-align: center;
-    padding: 20px 0;
-    font-size: 2em;
-    letter-spacing: 0.5px;
+color: var(--color-dark);
+text-align: center;
+padding: 20px 0;
+font-size: 2em;
+letter-spacing: 0.5px;
 }
 
 #contenedorNoticias {
-    max-width: 800px;
-    margin: 40px auto;
-    padding: 0 20px;
+max-width: 800px;
+margin: 40px auto;
+padding: 0 20px;
 }
 
 /* Tarjeta de noticia */
 .noticia {
-    background: #fff;
-    margin-bottom: 25px;
-    padding: 20px 25px;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+background: #fff;
+margin-bottom: 25px;
+padding: 20px 25px;
+border-radius: 12px;
+box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .noticia:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+transform: translateY(-2px);
+box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
 /* Título */
 .titulo {
-    font-weight: 700;
-    font-size: 1.5em;
-    color: #4b1d6b; /* más serio y profesional */
-    margin-bottom: 10px;
+font-weight: 700;
+font-size: 1.5em;
+color: #4b1d6b;
+margin-bottom: 10px;
 }
 
 /* Fecha y autor */
 .fecha, .autor {
-    font-size: 0.85em;
-    color: #999;
+font-size: 0.85em;
+color: #999;
 }
 
 .fecha {
-    display: inline-block;
-    margin-bottom: 5px;
+display: inline-block;
+margin-bottom: 5px;
 }
 
 .autor {
-    display: inline-block;
-    margin-left: 15px;
+display: inline-block;
+margin-left: 15px;
 }
 
 /* Descripción */
 .descripcion {
-    font-size: 1.05em;
-    line-height: 1.6;
-    color: #333;
-    margin-top: 10px;
+font-size: 1.05em;
+line-height: 1.6;
+color: #333;
+margin-top: 10px;
 }
 
-/* Separador sutil entre noticias */
+/* Separador sutil */
 .noticia + .noticia {
-    border-top: 1px solid #eee;
-    padding-top: 20px;
+border-top: 1px solid #eee;
+padding-top: 20px;
 }
 
 /* Adaptable a pantallas pequeñas */
 @media (max-width: 600px) {
-    #contenedorNoticias {
-        padding: 0 10px;
-    }
-    .noticia {
-        padding: 15px;
-    }
-    .titulo {
-        font-size: 1.3em;
-    }
-    .descripcion {
-        font-size: 1em;
-    }
+#contenedorNoticias {
+    padding: 0 10px;
+}
+.noticia {
+    padding: 15px;
+}
+.titulo {
+    font-size: 1.3em;
+}
+.descripcion {
+    font-size: 1em;
+}
+}
+
+
+/* =============================
+DASHBOARD DE MÉTRICAS
+============================= */
+
+.dashboard-metricas {
+padding: 1rem;
+max-width: 1100px;
+margin: 0 auto 2rem;
+box-sizing: border-box;
+}
+
+.metricas-header {
+display:flex;
+justify-content: space-between;
+align-items: center;
+gap: 1rem;
+margin-bottom: 1rem;
+flex-wrap: wrap;
+}
+
+.metricas-header h2 { margin: 0; }
+
+.metricas-grid {
+display: grid;
+grid-template-columns: 1fr 360px;
+gap: 1rem;
+align-items: start;
+}
+
+/* Columna de gráficos */
+.metricas-charts {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 1rem;
+}
+
+/* Tarjeta de gráfico */
+.chart-card {
+background: var(--color-bg);
+border-radius: 10px;
+padding: 0.75rem;
+box-shadow: var(--shadow-soft);
+}
+
+.chart-card h3 {
+margin: 0 0 0.5rem 0;
+font-size: 1rem;
+color: var(--color-dark);
+}
+
+/* 🔥 FIX PARA QUE EL PIE CHART NO CREZCA INFINITO */
+.chart-card canvas {
+width: 100% !important;
+max-width: 100%;
+height: 260px !important;  /* ALTURA FIJA */
+display: block;
+}
+
+/* Columna derecha (lista) */
+.metricas-info {
+display: flex;
+flex-direction: column;
+gap: 1rem;
+}
+
+.metricas-list {
+background: var(--color-bg);
+border-radius: 10px;
+padding: 0.75rem;
+box-shadow: var(--shadow-soft);
+min-height: 120px;
+}
+
+.ultimos-reportes {
+background: var(--color-bg);
+border-radius: 10px;
+padding: 0.75rem;
+box-shadow: var(--shadow-soft);
+}
+
+.ultimos-reportes ul {
+list-style: none;
+padding: 0;
+margin: 0;
+}
+
+.ultimos-reportes li {
+padding: 0.45rem 0;
+border-bottom: 1px dashed #eee;
+font-size: 0.95rem;
+}
+
+
+/* =============================
+RESPONSIVE
+============================= */
+
+@media (max-width: 900px) {
+.metricas-grid {
+    grid-template-columns: 1fr;
+}
+.metricas-charts {
+    grid-template-columns: 1fr;
+}
 }

@@ -32,6 +32,37 @@
 
 <body>
   <h2>News Feed</h2>
+    <!-- Dashboard de métricas -->
+  <section class="dashboard-metricas">
+    <div class="metricas-header">
+      <h2>Dashboard de reportes</h2>
+      <div id="metricas-resumen" class="resumen">Cargando métricas...</div>
+    </div>
+
+    <div class="metricas-grid">
+      <div class="metricas-charts">
+        <div class="chart-card">
+          <h3>Por tipo</h3>
+          <canvas id="chartPorTipo" aria-label="Gráfico de pastel por tipo" role="img"></canvas>
+        </div>
+
+        <div class="chart-card">
+          <h3>Por estado</h3>
+          <canvas id="chartPorEstado" aria-label="Gráfico de pastel por estado" role="img"></canvas>
+        </div>
+      </div>
+
+      <div class="metricas-info">
+        <div id="metricas" class="metricas-list">Cargando métricas...</div>
+
+        <div class="ultimos-reportes">
+          <h4>Últimos reportes</h4>
+          <ul id="listaUltimos"></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <div id="contenedorNoticias">Cargando noticias...</div>
 
   <script src="app.js"></script>
