@@ -162,7 +162,7 @@ function cerrarSesion() {
 }
 
 function handleUserButton() {
-  window.location.href = "../Usuario/login_usuario.html";
+  window.location.href = "./Usuario/login_usuario.html";
 }
 
 
