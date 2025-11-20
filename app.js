@@ -165,4 +165,14 @@ function handleUserButton() {
   window.location.href = "./Usuario/login_usuario.html";
 }
 
+//------------------------------------------------------------ Ham menu
+function handleUserButton() {
+    alert("Aquí puedes agregar la función del botón :)");
+  }
 
+// Toggle menú móvil
+const navbar = document.querySelector(".navbar");
+
+function toggleMenu() {
+  navbar.classList.toggle("open");
+}

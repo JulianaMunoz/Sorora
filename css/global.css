@@ -1,9 +1,9 @@
 /* =======================
-    VARIABLES GLOBALES
+VARIABLES GLOBALES
 ======================= */
 :root {
---color-primary: #A366FF;    /* violeta principal */
---color-secondary: #ff3b3b;  /* coral (botón SOS) */
+--color-primary: #A366FF;
+--color-secondary: #ff3b3b;
 --color-hover-button: #d62828;
 --color-bg: #ffffff;
 --color-bg-alt: #f7f7f8;
@@ -23,7 +23,7 @@
 }
 
 /* =======================
-    RESETEO Y BASE
+RESETEO Y BASE
 ======================= */
 * {
 margin: 0;
@@ -52,7 +52,7 @@ transition: var(--transition);
 }
 
 /* =======================
-    CONTENEDORES Y LAYOUT
+CONTENEDORES Y LAYOUT
 ======================= */
 .container {
 max-width: 1200px;
@@ -65,11 +65,9 @@ padding: 2rem 1rem;
 }
 
 /* =======================
-    TITULOS Y TEXTOS
+TITULOS Y TEXTOS
 ======================= */
-h1, h2, h3, h4 {
-font-weight: 700;
-}
+h1, h2, h3, h4 { font-weight: 700; }
 
 h1 { font-size: 2.2rem; }
 h2 { font-size: 1.8rem; }
@@ -78,60 +76,151 @@ h3 { font-size: 1.4rem; }
 p {
 color: var(--color-gray);
 font-size: 1rem;
-} 
+}
 
 /* =======================
-    NAV BAR / FOOTER
+NAV BAR
 ======================= */
-.header{
-    height: 125px;
-}
 
 .navbar {
 position: sticky;
+top: 0;
+z-index: 100;
+width: 100%;
 display: flex;
-justify-content: space-around;
+justify-content: space-between;
 align-items: center;
 background: var(--color-primary);
-padding: 1.2rem 0;
+padding: 1rem 2rem;
 color: var(--color-bg);
 }
 
-.navbar ul{
+/* LOGO */
+.nav-logo h1 {
+font-size: 1.8rem;
+color: white;
+}
+
+/* LISTA MENU */
+.nav-links {
 list-style: none;
 display: flex;
-flex-direction: row;
+gap: 3rem;
 align-items: center;
-
-justify-content: space-between;
-gap: 8rem;
 }
 
-.navbar a {
-color: var(--color-bg);
-transition: var(--transition);
-font-size: 18px;
-}
-
-.navbar a:hover {
-opacity: 0.8;
+.nav-links li {
+display: flex;
+align-items: center;
+gap: 6px;
 }
 
 .nav-links img {
-    margin-right: 5px;
-    width: 15px; /* ajusta tamaño del logo */
-    height: 15px;
+width: 18px;
+height: 18px;
 }
 
-#button-login{
-    background-color: var(--color-secondary);
-    color: var(--color-bg);
-    height: 25px;
-    width: 150px;
-    border-radius: 20px;
-    font-size: medium;
+/* BUTTON USER */
+#button-login {
+background-color: var(--color-secondary);
+color: var(--color-bg);
+height: 35px;
+width: 150px;
+border-radius: 20px;
+font-size: 0.95rem;
 }
 
-#button-login:hover{
-    background-color: var(--color-hover-button);
+#button-login:hover {
+background-color: var(--color-hover-button);
+}
+
+/* =======================
+MENU RESPONSIVE
+======================= */
+
+/* Ocultar botón hamburguesa en desktop */
+.menu-toggle {
+display: none;
+font-size: 28px;
+color: white;
+cursor: pointer;
+}
+
+/* ===== Tablet ===== */
+@media (max-width: 900px) {
+
+.navbar {
+padding: 1rem 1.2rem;
+}
+
+.nav-links {
+gap: 1.5rem;
+}
+
+#button-login {
+width: 130px;
+height: 32px;
+}
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 768px) {
+
+/* Mostrar icono hamburguesa */
+.menu-toggle {
+display: block;
+}
+
+/* Ocultar lista inicialmente */
+.nav-links {
+position: absolute;
+top: 100%;
+right: 0;
+background: var(--color-primary);
+width: 230px;
+padding: 1rem 0;
+flex-direction: column;
+gap: 0.5rem;
+align-items: flex-start;
+box-shadow: var(--shadow-strong);
+display: none;
+border-radius: 0 0 12px 12px;
+}
+
+.nav-links li {
+width: 100%;
+padding: 0.8rem 1.2rem;
+}
+
+.nav-links li a {
+font-size: 1rem;
+}
+
+/* Mostrar menú cuando la nav tenga "open" */
+.navbar.open .nav-links {
+display: flex;
+}
+
+/* Botón login más compacto */
+#button-login {
+width: 120px;
+height: 34px;
+}
+}
+
+/* ===== MOBILE SMALL ===== */
+@media (max-width: 480px) {
+
+.nav-logo h1 {
+font-size: 1.5rem;
+}
+
+.nav-links {
+width: 200px;
+}
+
+#button-login {
+width: 110px;
+font-size: 0.85rem;
+}
 }
