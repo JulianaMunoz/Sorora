@@ -143,7 +143,7 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
       userButton.textContent = "Iniciar sesión";
       // Nota: el HTML ya llama handleUserButton() con onclick, así que esto es redundante pero seguro
-      userButton.onclick = () => window.location.href = "./Usuario/login_usuario.html";
+      userButton.onclick = () => window.location.href = "./Usuario/login_usuario.html"; 
     }
   }
 });
