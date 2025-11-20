@@ -1,0 +1,43 @@
+@import url('../css/global.css');
+
+#map {
+    height: 87vh;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#controls {
+    width: 100%;
+    text-align: center;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+#sos-button {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 20vw;
+    height: 20vw;
+    max-width: 150px;
+    max-height: 150px;
+
+    border-radius: var(--radius);
+    background-color: var(--color-secondary);
+    color: var(--color-bg);
+    
+    font-size: calc(10px + 2vw);
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+button:hover {
+    background-color: var(--color-hover-button);
+}

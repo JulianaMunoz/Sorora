@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/styles_reportes.css">
+  <title>Registrar Reporte - Sorora</title>
+</head>
+
+<header>
+  <nav class="navbar">
+    <div class="nav-logo">
+      <a href="../Alertas/index.html"><h1>Sorora</h1></a>
+    </div>
+
+    <ul class="nav-links">
+    <li><img src="/frontend/assets/llamada-telefonica.png" alt="HL"><a href="../hotlines/index.html" class="active">Hotlines</a></li>
+    <li><img src="/frontend/assets/casa.png" alt="RF"><a href="../Mapa-Alberges/index.html">Refugios</a></li>
+    <li><img src="/frontend/assets/informe.png" alt="RP"><a href="../Reportes/registrar_reporte.html">Reportes</a></li>
+    <li><img src="/frontend/assets/news-podcast.png" alt="NW"><a href="../noticias/noticias.html">Noticias</a></li>
+    </ul>
+
+    <div class="nav-user">
+        <button id="button-login" onclick="handleUserButton()">No funciona</button>
+    </div>
+  </nav>
+</header>
+
+<body>
+  <h2>Registrar Reporte de Abuso</h2>
+  <form id="formReporte">
+    <label>Tipo de caso</label>
+    <select id="tipo" required>
+      <option value="">Seleccione un tipo</option>
+      <option value="Feminicidio">Feminicidio</option>
+      <option value="Acoso callejero">Acoso callejero</option>
+      <option value="Violencia doméstica">Violencia doméstica</option>
+      <option value="Otro">Otro</option>
+    </select>
+
+    <label>Descripción</label>
+    <textarea id="descripcion" rows="4" required></textarea>
+
+    <label>Ubicación</label>
+    <input type="text" id="ubicacion" placeholder="Ciudad o lugar del incidente" />
+
+    <label>Reportado por</label>
+    <input type="text" id="reportado_por" placeholder="Nombre o ID del usuario" />
+
+    <button id="enviar-reporte" type="submit">Enviar Reporte</button>
+  </form>
+
+  <div id="resultado"></div>
+
+  <script src="registrar_reporte.js"></script>
+</body>
+</html>

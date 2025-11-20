@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/styles_home.css">
+  <title>Sorora - Prueba de Alertas</title>
+</head>
+<body>
+<header>
+    <nav class="navbar">
+      <div class="nav-logo">
+        <a href="../Alertas/index.html"><h1>Sorora</h1></a>
+      </div>
+
+      <ul class="nav-links">
+      <li><img src="/frontend/assets/llamada-telefonica.png" alt="HL"><a href="../hotlines/index.html" class="active">Hotlines</a></li>
+      <li><img src="/frontend/assets/casa.png" alt="RF"><a href="../Mapa-Alberges/index.html">Refugios</a></li>
+      <li><img src="/frontend/assets/informe.png" alt="RP"><a href="../Reportes/registrar_reporte.html">Reportes</a></li>
+      <li><img src="/frontend/assets/news-podcast.png" alt="NW"><a href="../noticias/noticias.html">Noticias</a></li>
+      </ul>
+
+      <div class="nav-user">
+        <button id="button-login" onclick="handleUserButton()">No funciona</button>
+      </div>
+    </nav>
+  </header>
+
+  <div id="map"></div>
+  <div id="controls">
+    <button id="sos-button">SOS</button>
+  </div>
+
+  <script src="app.js"></script>
+  <script
+    async
+    defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCt9p61hcTtkCucHh98S4mpeXATKV3nIw&callback=initMap">
+  </script>
+</body>
+</html>

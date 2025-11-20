@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="../css/global.css">
+  <title>Panel Administrador - Sorora</title>
+  <style>
+    body { font-family: Arial; background: #fff5e6; padding: 2rem; }
+    h1 { color: #a66200; }
+    table { border-collapse: collapse; width: 100%; margin-top: 20px; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+    th { background-color: #ffe0b3; }
+    .update-form { display: none; margin-top: 10px; }
+    input { padding: 5px; margin-right: 5px; }
+    button { cursor: pointer; }
+  </style>
+</head>
+<body>
+  <h1>Panel del Administrador 🛠️</h1>
+  <p>Gestión de usuarios registrados:</p>
+
+  <table id="tablaUsuarios">
+    <thead>
+      <tr><th>Nombre</th><th>Correo</th><th>Rol</th><th>Acciones</th></tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <button onclick="cerrarSesion()">Cerrar sesión</button>
+
+  <script>
+    // 🔹 Cargar todos los usuarios
+    async function cargarUsuarios() {
+      try {
+        const res = await fetch("https://api-web-ii.vercel.app/usuarios/todos");
+        const data = await res.json();
+        const tbody = document.querySelector("#tablaUsuarios tbody");
+
+        tbody.innerHTML = "";
+        data.forEach(u => {
+          tbody.innerHTML += `
+            <tr data-correo="${u.correo}">
+              <td>${u.nombre}</td>
+              <td>${u.correo}</td>
+              <td>${u.rol}</td>
+              <td>
+                <button onclick="toggleRol('${u.correo}', '${u.rol}')">Cambiar rol</button>
+                <button onclick="mostrarFormulario(this)">Editar perfil</button>
+                <div class="update-form">
+                  <input type="text" placeholder="Nuevo nombre" class="nuevo-nombre" value="${u.nombre}">
+                  <input type="password" placeholder="Nueva contraseña" class="nueva-contrasena" />
+                  <button onclick="actualizarPerfil('${u.correo}', this)">Guardar</button>
+                  <button onclick="ocultarFormulario(this)">Cancelar</button>
+                  <p class="msg" style="color:red;"></p>
+                </div>
+              </td>
+            </tr>
+          `;
+        });
+      } catch (e) {
+        console.error(e);
+        alert("Error al cargar usuarios");
+      }
+    }
+
+    // 🔹 Cambiar el rol de un usuario
+    async function toggleRol(correo, rolActual) {
+      const nuevoRol = rolActual === "admin" ? "usuario" : "admin";
+      try {
+        const res = await fetch(`https://api-web-ii.vercel.app/usuarios/rol/${encodeURIComponent(correo)}`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json", "Accept": "application/json" },
+          body: JSON.stringify({ nuevo_rol: nuevoRol }) // 🔸 Enviamos como objeto con clave
+        });
+        const data = await res.json();
+
+        if (res.ok) {
+          alert(data.msg);
+          cargarUsuarios();
+        } else {
+          alert(data.detail || "Error al cambiar rol");
+        }
+      } catch (e) {
+        console.error(e);
+        alert("Error al cambiar rol");
+      }
+    }
+
+    // 🔹 Mostrar formulario de actualización
+    function mostrarFormulario(btn) {
+      const form = btn.nextElementSibling;
+      form.style.display = "block";
+      btn.style.display = "none";
+    }
+
+    // 🔹 Ocultar formulario
+    function ocultarFormulario(btn) {
+      const form = btn.parentElement;
+      form.style.display = "none";
+      const editarBtn = form.previousElementSibling;
+      editarBtn.style.display = "inline-block";
+      form.querySelector(".msg").textContent = "";
+    }
+
+    // 🔹 Actualizar nombre o contraseña
+    async function actualizarPerfil(correo, btn) {
+      const form = btn.parentElement;
+      const nombre = form.querySelector(".nuevo-nombre").value.trim();
+      const contrasena = form.querySelector(".nueva-contrasena").value.trim();
+      const msg = form.querySelector(".msg");
+
+      if (!nombre && !contrasena) {
+        msg.textContent = "Ingrese al menos un campo para actualizar";
+        return;
+      }
+
+      const datos = {};
+      if (nombre) datos.nombre = nombre;
+      if (contrasena) datos.contrasena = contrasena;
+
+      try {
+        const res = await fetch(`https://api-web-ii.vercel.app/usuarios/perfil/${encodeURIComponent(correo)}`, {
+          method: "PUT",
+          headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(datos)
+        });
+
+        const data = await res.json();
+        if (res.ok) {
+          alert(data.msg);
+          cargarUsuarios();
+          ocultarFormulario(btn);
+        } else {
+          msg.textContent = data.detail || "Error al actualizar perfil";
+        }
+      } catch (e) {
+        console.error(e);
+        msg.textContent = "Error en la actualización";
+      }
+    }
+
+    // 🔹 Cerrar sesión
+    function cerrarSesion() {
+      alert("Sesión cerrada");
+      window.location.href = "login_usuario.html";
+    }
+
+    cargarUsuarios();
+  </script>
+</body>
+</html>

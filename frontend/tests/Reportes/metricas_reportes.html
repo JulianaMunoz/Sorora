@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="../css/global.css">
+  <title>Métricas de Reportes - Sorora</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f8f9fa;
+      padding: 30px;
+    }
+    h1 {
+      text-align: center;
+      color: #5a189a;
+    }
+    .card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      padding: 20px;
+      margin: 20px auto;
+      max-width: 600px;
+    }
+    .section-title {
+      color: #5a189a;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+    ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
+    li {
+      margin-bottom: 6px;
+    }
+  </style>
+</head>
+
+<header>
+  <nav class="navbar">
+    <div class="nav-logo">
+      <a href="../Alertas/index.html"><h1>Sorora</h1></a>
+    </div>
+
+    <ul class="nav-links">
+    <li><img src="/frontend/assets/llamada-telefonica.png" alt="HL"><a href="../hotlines/index.html" class="active">Hotlines</a></li>
+    <li><img src="/frontend/assets/casa.png" alt="RF"><a href="../Mapa-Alberges/index.html">Refugios</a></li>
+    <li><img src="/frontend/assets/informe.png" alt="RP"><a href="../Reportes/registrar_reporte.html">Reportes</a></li>
+    <li><img src="/frontend/assets/news-podcast.png" alt="NW"><a href="../noticias/noticias.html">Noticias</a></li>
+    </ul>
+
+    <div class="nav-user">
+      <button id="button-login" onclick="window.location.href='../Usuario/login_usuario.html'">Iniciar sesión</button>
+    </div>
+  </nav>
+</header>
+
+<body>
+  <h1>Métricas de Reportes</h1>
+  <div class="card">
+    <div id="metricas"></div>
+  </div>
+
+  <script src="metricas_reportes.js"></script>
+</body>
+</html>

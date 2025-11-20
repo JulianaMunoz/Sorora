@@ -1,0 +1,106 @@
+@import url('../css/global.css');
+
+#div_gestionUsuarios{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; 
+    height: 80vh;
+}
+
+.card { 
+    background: var(--color-bg); 
+    padding: 2rem; 
+    border-radius: 10px; 
+    box-shadow: 0 0 10px #ccc; 
+    text-align: center; 
+    width: 40%; 
+    height: 75%;
+}
+
+.card_crear { 
+    background: var(--color-bg); 
+    padding: 2rem; 
+    border-radius: 10px; 
+    box-shadow: 0 0 10px #ccc; 
+    text-align: center; 
+    width: 40%; 
+    height: 90%;
+}
+
+
+.labels{
+    display: flex;
+    justify-self: left;
+    margin-top: 16px;
+}
+
+input{ 
+    border-radius: 8px;
+    border: 1px solid;
+    margin: 8px 0 16px 0; 
+    padding: 10px; 
+    width: 100%; 
+}
+
+#ingresar{
+    padding: 1rem;
+    margin-top: 25px;
+    width: 150px;
+    height: 50px;
+    border-radius: 20px;
+    background-color: var(--color-secondary);
+    color: var(--color-bg);
+    font-size: medium;
+}
+
+#ingresar:hover{
+    background-color: var(--color-hover-button);
+}
+
+#msg { 
+    min-height: 1.5em; 
+    color: red; 
+}
+
+.registro-msg{
+    display: flex;
+    flex-direction: row;
+    font-size: small;
+}
+
+.registro-msg a{
+    display: flex;
+    flex-direction: row;
+    font-size: small;
+    margin-left: 5px;
+    color: var(--color-primary);
+}
+
+.registro-msg a:hover{
+    opacity: 0.8;
+}
+
+#rol{
+    width: 60%;
+    border: 1px solid;
+    border-radius: 8px;
+    padding: 10px; 
+    margin-right: 65px;
+    margin-top: 10px;
+}
+
+#registro{
+    padding: 0.8rem;
+    width: 150px;
+    height: 45px;
+    border-radius: 20px;
+    background-color: var(--color-secondary);
+    color: var(--color-bg);
+    font-size: medium;
+}
+
+p{
+    margin-top: 10px;
+    font-size: small;
+}

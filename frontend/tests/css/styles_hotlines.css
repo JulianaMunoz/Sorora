@@ -1,0 +1,112 @@
+@import url('../css/global.css');
+
+h2{
+    display: flex;
+    justify-self: center;
+    padding: 20px;
+}
+
+/* Controls (buscador) */
+.hotlines-controls{
+display:flex;
+justify-content: center;
+margin-bottom: 1.25rem;
+}
+
+.hotline-search{
+width: 520px;
+max-width: 100%;
+padding: .75rem 1rem;
+border-radius: 999px;
+border: 1px solid #e6e6e6;
+box-shadow: var(--shadow-soft);
+font-size: 1rem;
+transition: var(--transition);
+}
+
+.hotline-search:focus{
+outline: none;
+border-color: var(--color-primary);
+box-shadow: 0 6px 18px rgba(163,102,255,0.12);
+}
+
+/* Grid de tarjetas */
+.hotlines-grid{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columnas en escritorio */
+    gap: 1.5rem;
+    align-items: start;
+}
+
+/* Tarjeta */
+.hotline-card{
+    background: #fff;
+    border-radius: var(--radius);
+    padding: 1.25rem;
+    box-shadow: var(--shadow-soft);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: transform .18s ease, box-shadow .18s ease;
+    min-height: 190px;
+}
+
+/* Hover sutil */
+.hotline-card:hover{
+    transform: translateY(-6px);
+    box-shadow: 0 10px 26px rgba(16,16,16,0.12);
+}
+
+/* Avatar circular */
+.hotline-avatar{
+    width: 68px;
+    height: 68px;
+    border-radius: 50%;
+    background: linear-gradient(180deg,#f6f6f8,#ffffff);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+    margin-bottom: .6rem;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.06);
+}
+
+.hotline-avatar img{
+    width: 56px;
+    height: 56px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+/* Texto */
+.hotline-title{
+    font-size: 1.05rem;
+    color: #222;
+    margin: .35rem 0 0.25rem;
+    }
+
+.hotline-number{
+    color: var(--color-muted);
+    font-size: .95rem;
+    margin-bottom: .65rem;
+}
+
+/* Botón llamar */
+.hotline-call{
+    display:inline-block;
+    padding: .45rem .9rem;
+    border-radius: 999px;
+    background: var(--color-primary);
+    color: #fff;
+    font-weight: 600;
+    font-size: .95rem;
+    text-decoration:none;
+    box-shadow: 0 6px 14px rgba(163,102,255,0.12);
+    transition: var(--transition);
+}
+
+.hotline-call:hover{
+    transform: translateY(-3px);
+    filter: brightness(.98);
+}
