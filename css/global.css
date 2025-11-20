@@ -81,30 +81,6 @@ font-size: 1rem;
 } 
 
 /* =======================
-    FORMULARIOS
-======================= */
-/* form {
-display: flex;
-flex-direction: column;
-gap: 1rem;
-}
-
-input, textarea, select {
-width: 100%;
-padding: 0.75rem;
-border-radius: var(--radius);
-border: 1px solid #ddd;
-font-size: 1rem;
-transition: var(--transition);
-}
-
-input:focus, textarea:focus, select:focus {
-border-color: var(--color-primary);
-outline: none;
-box-shadow: 0 0 0 2px rgba(163, 102, 255, 0.2);
-} */
-
-/* =======================
     NAV BAR / FOOTER
 ======================= */
 .header{
@@ -159,23 +135,3 @@ opacity: 0.8;
 #button-login:hover{
     background-color: var(--color-hover-button);
 }
-
-/* =======================
-UTILIDADES
-======================= 
-.center {
-display: flex;
-justify-content: center;
-align-items: center;
-}
-
-.card {
-background: var(--color-bg-alt);
-border-radius: var(--radius);
-padding: 1.5rem;
-box-shadow: var(--shadow-soft);
-}
-
-.hidden {
-display: none;
-} */
