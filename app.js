@@ -1,8 +1,12 @@
+/* ============================
+   app.js — Reemplazar completo
+   ============================ */
+
 let map;
 let userMarker;
 let shelterMarkers = [];
 
-// Función para obtener los albergues del API
+/* ---------- API: cargar albergues ---------- */
 async function loadShelters() {
   try {
     const response = await fetch("https://api-web-ii.vercel.app/shelters", {
@@ -10,9 +14,7 @@ async function loadShelters() {
       headers: { "Content-Type": "application/json" },
     });
 
-    if (!response.ok) {
-      throw new Error(`Error HTTP: ${response.status}`);
-    }
+    if (!response.ok) throw new Error(`Error HTTP: ${response.status}`);
 
     const shelters = await response.json();
     console.log("Albergues recibidos:", shelters);
@@ -23,9 +25,8 @@ async function loadShelters() {
   }
 }
 
-// Función para mostrar los albergues en el mapa
+/* ---------- Mostrar albergues en el mapa ---------- */
 function displayShelters(shelters) {
-  // Eliminar marcadores antiguos
   shelterMarkers.forEach((m) => m.setMap(null));
   shelterMarkers = [];
 
@@ -46,9 +47,9 @@ function displayShelters(shelters) {
       content: `
         <div style="font-size:14px;">
           <strong>${shelter.name}</strong><br>
-          Dirección: ${shelter.address}<br>
-          Capacidad: ${shelter.capacity}<br>
-          Teléfono: ${shelter.phone}
+          Dirección: ${shelter.address || 'No especificada'}<br>
+          Capacidad: ${shelter.capacity || 'N/A'}<br>
+          Teléfono: ${shelter.phone || 'N/A'}
         </div>
       `,
     });
@@ -58,7 +59,7 @@ function displayShelters(shelters) {
   });
 }
 
-// Inicializar mapa
+/* ---------- Inicializar mapa (llamado por la API de Google Maps) ---------- */
 function initMap() {
   map = new google.maps.Map(document.getElementById("map"), {
     zoom: 13,
@@ -67,19 +68,12 @@ function initMap() {
     streetViewControl: false,
   });
 
-  // Cargar albergues
-  loadShelters().then((shelters) => {
-    displayShelters(shelters);
-  });
+  loadShelters().then((shelters) => displayShelters(shelters));
 
-  // Obtener ubicación del usuario
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
       (pos) => {
-        const userPos = {
-          lat: pos.coords.latitude,
-          lng: pos.coords.longitude,
-        };
+        const userPos = { lat: pos.coords.latitude, lng: pos.coords.longitude };
 
         userMarker = new google.maps.Marker({
           position: userPos,
@@ -95,29 +89,24 @@ function initMap() {
   }
 }
 
-// Enviar alerta al backend
+/* ---------- Enviar alerta al backend ---------- */
 async function enviarAlerta(lat, lng) {
   try {
     const body = {
-        tipo: "Emergencia",
-        descripcion: "Botón SOS activado desde el mapa",
-        nivel: "Alto",
-        latitude: lat,
-        longitude: lng
+      tipo: "Emergencia",
+      descripcion: "Botón SOS activado desde el mapa",
+      nivel: "Alto",
+      latitude: lat,
+      longitude: lng,
     };
-
 
     const response = await fetch("https://api-web-ii.vercel.app/alerts", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),
     });
 
-    if (!response.ok) {
-      throw new Error(`Error HTTP ${response.status}`);
-    }
+    if (!response.ok) throw new Error(`Error HTTP ${response.status}`);
 
     const data = await response.json();
     alert("🚨 Alerta enviada con éxito.\nNotificación generada correctamente.");
@@ -128,51 +117,95 @@ async function enviarAlerta(lat, lng) {
   }
 }
 
-// Evento para el botón SOS
+/* ---------- Manejo DOMContentLoaded: SOS y usuario ---------- */
 document.addEventListener("DOMContentLoaded", () => {
+  // SOS button
   const sosButton = document.getElementById("sos-button");
-  sosButton.addEventListener("click", async () => {
-    if (!userMarker) {
-      alert("No se detectó tu ubicación todavía.");
-      return;
-    }
+  if (sosButton) {
+    sosButton.addEventListener("click", async () => {
+      if (!userMarker) {
+        alert("No se detectó tu ubicación todavía.");
+        return;
+      }
+      const position = userMarker.getPosition();
+      await enviarAlerta(position.lat(), position.lng());
+    });
+  }
 
-    const position = userMarker.getPosition();
-    await enviarAlerta(position.lat(), position.lng());
-  });
-});
-
-// al cargar la página
-document.addEventListener("DOMContentLoaded", () => {
+  // Botón usuario (estado: iniciar / cerrar sesión)
   const userButton = document.getElementById("button-login");
   const usuario = JSON.parse(localStorage.getItem("usuario"));
 
-  if (usuario) {
-    userButton.textContent = "Cerrar sesión";
-    userButton.onclick = cerrarSesion;
-  } else {
-    userButton.textContent = "Iniciar sesión";
-    userButton.onclick = () => window.location.href = "../Usuario/login_usuario.html";
+  if (userButton) {
+    if (usuario) {
+      userButton.textContent = "Cerrar sesión";
+      userButton.onclick = cerrarSesion;
+    } else {
+      userButton.textContent = "Iniciar sesión";
+      // Nota: el HTML ya llama handleUserButton() con onclick, así que esto es redundante pero seguro
+      userButton.onclick = () => window.location.href = "../Usuario/login_usuario.html";
+    }
   }
 });
 
+/* ---------- Funciones de sesión ---------- */
 function cerrarSesion() {
-  localStorage.removeItem("usuario"); 
-  window.location.reload(); 
+  localStorage.removeItem("usuario");
+  window.location.reload();
 }
 
+/* ---------- handleUserButton global (llamado desde el HTML) ---------- */
 function handleUserButton() {
-  window.location.href = "./Usuario/login_usuario.html";
-}
-
-//------------------------------------------------------------ Ham menu
-function handleUserButton() {
-    alert("Aquí puedes agregar la función del botón :)");
+  // Si quieres comportamiento más complejo (modal, menú, etc.) edítalo aquí.
+  const usuario = JSON.parse(localStorage.getItem("usuario"));
+  if (usuario) {
+    // ejemplo: mostrar info o cerrar sesión
+    if (confirm("¿Quieres cerrar sesión?")) cerrarSesion();
+  } else {
+    window.location.href = "../Usuario/login_usuario.html";
   }
-
-// Toggle menú móvil
-const navbar = document.querySelector(".navbar");
-
-function toggleMenu() {
-  navbar.classList.toggle("open");
 }
+
+/* ---------- MENU HAMBURGUESA: visibilidad condicional + toggle ---------- */
+
+// referenciamos elementos de menú
+const navbar = document.querySelector(".navbar");
+const menuToggle = document.querySelector(".menu-toggle");
+
+// definimos toggleMenu como global (para que onclick en HTML funcione)
+window.toggleMenu = function () {
+  if (!navbar) return;
+  navbar.classList.toggle("open");
+};
+
+// Función que controla la visibilidad del icono hamburguesa según ancho
+function updateMenuToggleVisibility() {
+  if (!menuToggle || !navbar) return;
+  const isMobile = window.matchMedia("(max-width: 768px)").matches;
+
+  if (isMobile) {
+    // quitamos estilo inline que podría haber dejado JS previo
+    menuToggle.style.display = "";
+  } else {
+    // ocultar el icono y forzar cerrar el menú para desktop
+    menuToggle.style.display = "none";
+    navbar.classList.remove("open");
+  }
+}
+
+// Inicializar visibilidad una vez cargue la página (y después cuando se redimensione)
+window.addEventListener("load", updateMenuToggleVisibility);
+
+let resizeTimer;
+window.addEventListener("resize", () => {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(updateMenuToggleVisibility, 120);
+});
+
+/* ---------- Seguridad: si el menuToggle fue clickado programáticamente ---------- */
+if (menuToggle) {
+  // Si alguien le pone display block por error desde fuera, nos aseguramos en el inicio
+  updateMenuToggleVisibility();
+}
+
+/* ---------- FIN del archivo ---------- */
