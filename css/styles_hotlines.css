@@ -1,19 +1,26 @@
 @import url('../css/global.css');
 
-h2{
-    display: flex;
-    justify-self: center;
-    padding: 20px;
+/* =============================
+HOTLINES — Responsive Styles
+============================= */
+
+/* Título */
+h2 {
+text-align: center;
+padding: 20px 1rem;
+font-size: 1.6rem;
+color: var(--color-dark);
 }
 
 /* Controls (buscador) */
-.hotlines-controls{
-display:flex;
+.hotlines-controls {
+display: flex;
 justify-content: center;
-margin-bottom: 1.25rem;
+margin: 0 0 1.25rem 0;
+padding: 0 1rem;
 }
 
-.hotline-search{
+.hotline-search {
 width: 520px;
 max-width: 100%;
 padding: .75rem 1rem;
@@ -24,89 +31,224 @@ font-size: 1rem;
 transition: var(--transition);
 }
 
-.hotline-search:focus{
+.hotline-search:focus {
 outline: none;
 border-color: var(--color-primary);
 box-shadow: 0 6px 18px rgba(163,102,255,0.12);
 }
 
-/* Grid de tarjetas */
-.hotlines-grid{
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 columnas en escritorio */
-    gap: 1.5rem;
-    align-items: start;
+/* Grid de tarjetas: desktop 3 columnas por defecto */
+.hotlines-grid {
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+gap: 1.5rem;
+align-items: start;
+padding: 0 1.25rem 2rem;
 }
 
 /* Tarjeta */
-.hotline-card{
-    background: #fff;
-    border-radius: var(--radius);
-    padding: 1.25rem;
-    box-shadow: var(--shadow-soft);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    transition: transform .18s ease, box-shadow .18s ease;
-    min-height: 190px;
+.hotline-card {
+background: #fff;
+border-radius: 12px; /* antes era var(--radius) (50%) — eso hacía círculos; ahora uso 12px */
+padding: 1.25rem;
+box-shadow: var(--shadow-soft);
+display: flex;
+flex-direction: column;
+align-items: center;
+text-align: center;
+transition: transform .18s ease, box-shadow .18s ease;
+min-height: 190px;
 }
 
 /* Hover sutil */
-.hotline-card:hover{
-    transform: translateY(-6px);
-    box-shadow: 0 10px 26px rgba(16,16,16,0.12);
+.hotline-card:hover,
+.hotline-card:focus-within {
+transform: translateY(-6px);
+box-shadow: 0 10px 26px rgba(16,16,16,0.12);
 }
 
 /* Avatar circular */
-.hotline-avatar{
-    width: 68px;
-    height: 68px;
-    border-radius: 50%;
-    background: linear-gradient(180deg,#f6f6f8,#ffffff);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    overflow:hidden;
-    margin-bottom: .6rem;
-    box-shadow: 0 6px 14px rgba(0,0,0,0.06);
+.hotline-avatar {
+width: 68px;
+height: 68px;
+border-radius: 50%;
+background: linear-gradient(180deg,#f6f6f8,#ffffff);
+display: flex;
+align-items: center;
+justify-content: center;
+overflow: hidden;
+margin-bottom: .6rem;
+box-shadow: 0 6px 14px rgba(0,0,0,0.06);
 }
 
-.hotline-avatar img{
-    width: 56px;
-    height: 56px;
-    object-fit: cover;
-    border-radius: 50%;
+.hotline-avatar img {
+width: 56px;
+height: 56px;
+object-fit: cover;
+border-radius: 50%;
 }
 
 /* Texto */
-.hotline-title{
-    font-size: 1.05rem;
-    color: #222;
-    margin: .35rem 0 0.25rem;
-    }
+.hotline-title {
+font-size: 1.05rem;
+color: #222;
+margin: .35rem 0 0.25rem;
+}
 
-.hotline-number{
-    color: var(--color-muted);
-    font-size: .95rem;
-    margin-bottom: .65rem;
+.hotline-number {
+color: var(--color-muted, var(--color-gray));
+font-size: .95rem;
+margin-bottom: .65rem;
 }
 
 /* Botón llamar */
-.hotline-call{
-    display:inline-block;
-    padding: .45rem .9rem;
-    border-radius: 999px;
-    background: var(--color-primary);
-    color: #fff;
-    font-weight: 600;
-    font-size: .95rem;
-    text-decoration:none;
-    box-shadow: 0 6px 14px rgba(163,102,255,0.12);
-    transition: var(--transition);
+.hotline-call {
+display: inline-block;
+padding: .45rem .9rem;
+border-radius: 999px;
+background: var(--color-primary);
+color: #fff;
+font-weight: 600;
+font-size: .95rem;
+text-decoration: none;
+box-shadow: 0 6px 14px rgba(163,102,255,0.12);
+transition: var(--transition);
 }
 
-.hotline-call:hover{
-    transform: translateY(-3px);
-    filter: brightness(.98);
+/* Mejor feedback accesible para teclado */
+.hotline-call:focus,
+.hotline-call:hover {
+transform: translateY(-3px);
+filter: brightness(.98);
+outline: 3px solid rgba(163,102,255,0.12);
+outline-offset: 3px;
+}
+
+/* ============================
+MEDIA QUERIES (RESPONSIVE)
+============================ */
+
+/* Large tablets / small desktops */
+@media (max-width: 1024px) {
+.hotlines-grid {
+grid-template-columns: repeat(2, 1fr); /* 2 columnas */
+gap: 1.25rem;
+padding: 0 1rem 1.75rem;
+}
+
+.hotline-search {
+width: 420px;
+}
+
+.hotline-card {
+min-height: 180px;
+}
+}
+
+/* Tablets / landscape mobile */
+@media (max-width: 768px) {
+h2 { font-size: 1.4rem; padding-top: 16px; }
+
+.hotlines-grid {
+grid-template-columns: 1fr; /* 1 columna a partir de tablet pequeño */
+gap: 1rem;
+padding: 0 0.9rem 1.5rem;
+}
+
+.hotline-search {
+width: 100%;
+max-width: 680px;
+}
+
+.hotline-card {
+flex-direction: row;
+align-items: center;
+text-align: left;
+gap: 1rem;
+padding: 0.9rem;
+min-height: 90px;
+}
+
+.hotline-avatar {
+width: 56px;
+height: 56px;
+margin-bottom: 0;
+flex: 0 0 56px;
+}
+
+.hotline-avatar img {
+width: 48px;
+height: 48px;
+}
+
+.hotline-title {
+font-size: 1rem;
+margin: 0 0 0.2rem 0;
+}
+
+.hotline-number {
+font-size: .9rem;
+margin-bottom: 0.35rem;
+}
+
+.hotline-call {
+margin-left: auto;
+flex: 0 0 auto;
+}
+}
+
+/* Mobile pequeño */
+@media (max-width: 480px) {
+h2 { font-size: 1.2rem; }
+
+.hotlines-grid {
+padding: 0 0.7rem 1.25rem;
+gap: 0.9rem;
+}
+
+.hotline-card {
+padding: 0.8rem;
+gap: 0.7rem;
+}
+
+.hotline-avatar {
+width: 48px;
+height: 48px;
+flex: 0 0 48px;
+}
+
+.hotline-avatar img {
+width: 40px;
+height: 40px;
+}
+
+.hotline-title {
+font-size: 0.98rem;
+}
+
+.hotline-number {
+font-size: 0.88rem;
+}
+
+/* Hacemos el botón llamar más grande y fácil de tocar en móvil */
+.hotline-call {
+padding: .55rem .9rem;
+font-size: 0.95rem;
+min-width: 92px;
+}
+
+/* Si quieres que el botón llene todo el ancho en móvil,
+    descomenta las siguientes 2 líneas: */
+/* .hotline-call { display:block; width:100%; text-align:center; margin-top:0.6rem; } */
+}
+
+/* =============================
+Ajustes para imágenes remotas lentas
+============================= */
+.hotline-avatar img {
+/* evita reflow brusco si la imagen carga tarde */
+display: block;
+width: 100%;
+height: 100%;
+object-fit: cover;
 }
