@@ -4,27 +4,31 @@
   <meta charset="UTF-8" />
   <link rel="stylesheet" href="../css/global.css">
   <link rel="stylesheet" href="../css/styles_noticias.css">
-  <title>Noticias - Sorora</title>
-</head>
+  <link rel="icon" type="image/png" href="../assets/favicon.png">
+  <title>Sorora</title>
+  </head>
+  <body>
+  <header>
+      <nav class="navbar">
+      <div class="nav-logo">
+          <a href="./index.html"><h1>Sorora</h1></a>
+      </div>
 
-<header>
-  <nav class="navbar">
-    <div class="nav-logo">
-      <a href="../Alertas/index.html"><h1>Sorora</h1></a>
-    </div>
+      <!-- BOTÓN HAMBURGUESA -->
+      <div class="menu-toggle" onclick="toggleMenu()">☰</div>
 
-    <ul class="nav-links">
-    <li><img src="../assets/llamada-telefonica.png" alt="HL"><a href="../hotlines/hotlines.html" class="active">Hotlines</a></li>
-    <li><img src="../assets/casa.png" alt="RF"><a href="../index.html">Refugios</a></li>
-    <li><img src="../assets/informe.png" alt="RP"><a href="../Reportes/registrar_reporte.html">Reportes</a></li>
-    <li><img src="../assets/news-podcast.png" alt="NW"><a href="../noticias/noticias.html">Noticias</a></li>
-    </ul>
+      <ul class="nav-links">
+          <li><img src="./assets/llamada-telefonica.png" alt="HL"><a href="./hotlines/hotlines.html" class="active">Hotlines</a></li>
+          <li><img src="./assets/casa.png" alt="RF"><a href="./index.html">Refugios</a></li>
+          <li><img src="./assets/informe.png" alt="RP"><a href="./Reportes/registrar_reporte.html">Reportes</a></li>
+          <li><img src="./assets/news-podcast.png" alt="NW"><a href="./noticias/noticias.html">Noticias</a></li>
+      </ul>
 
-    <div class="nav-user">
-        <button id="button-login" onclick="handleUserButton()">No funciona</button>
-    </div>
-  </nav>
-</header>
+      <div class="nav-user">
+          <button id="button-login" onclick="handleUserButton()">No funciona</button>
+      </div>
+      </nav>
+  </header>
 
 <body>
   <h2>News Feed</h2>
